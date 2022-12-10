@@ -12,6 +12,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "gif-to-png": "^2.0.5",
+    "glob": "^8.0.3",
     "http": "^0.0.1-security",
     "image-size": "^1.0.2",
     "sharp": "^0.31.2"
