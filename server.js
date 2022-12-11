@@ -1,20 +1,21 @@
-let generateFrames = require('gif-to-png')
+
 const sharp = require("sharp");
 let fs = require('fs')
 let gifURL = './import.gif'
 let outputPath = './images'
 const glob = require('glob');
 var urls = []
+try{fs.mkdirSync('output')}catch(e){}
 const url = fs.readdirSync("./images");
 for (let i = 0; i < url.length; i++) {
     urls.push("./images/" + url[i]);
     console.log(url[i])
 }
+
 (async () => {
     const imagePaths = urls
     const imageAttrs = [];
     console.log(imagePaths)
-    // 連結する画像の情報取得
     const promises = [];
     const imagePromise = path =>
         new Promise(async resolve => {
@@ -32,7 +33,6 @@ for (let i = 0; i < url.length; i++) {
         values.forEach(value => imageAttrs.push(value));
     });
 
-    // outputする画像の設定
     const outputImgWidth = imageAttrs.reduce((acc, cur) => acc + cur.width, 0);
     const outputImgHeight = Math.max(...imageAttrs.map(v => v.height));
     let totalLeft = 0;
@@ -47,7 +47,6 @@ for (let i = 0; i < url.length; i++) {
         };
     });
 
-    // 連結処理
     sharp({
         create: {
             width: outputImgWidth,
@@ -57,7 +56,7 @@ for (let i = 0; i < url.length; i++) {
         }
     })
         .composite(compositeParams)
-        .toFile("entername.png");
+        .toFile("./output/output.png");
 })();
 
 
@@ -76,7 +75,7 @@ const text = `
         }
     }`
 try {
-    fs.writeFileSync('./entername.txt', text)
+    fs.writeFileSync('./output/output.txt', text)
     //file written successfully
 } catch (err) {
     console.error(err)
