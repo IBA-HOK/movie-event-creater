@@ -17,6 +17,6 @@ for (var i = 0; i < 100; i++) {
             offset: 100 * [i] // seek offset in milliseconds
         }
         );
-        console.log(`${name}.jpg was geberated!`)
+        console.log(`${name}.png was generated!`)
     } catch (e) { break }
 }
