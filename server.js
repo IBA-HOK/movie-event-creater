@@ -81,4 +81,3 @@ try {
 } catch (err) {
     console.error(err)
 }
-fs.rmSync("images", { recursive: true })
