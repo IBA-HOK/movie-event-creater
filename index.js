@@ -3,8 +3,9 @@ const ffmpeg = require('fluent-ffmpeg');
 ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require("fs")
 const extractFrame = require('ffmpeg-extract-frame')
+try{fs.rmSync("images", { recursive: true });}catch(e){}
 try {
-    fs.rmSync("images", { recursive: true }); fs.mkdirSync('images');
+    fs.mkdirSync('images');
     console.log("images file was cleared!")
 } catch (e) { }
 for (var i = 0; i < 100; i++) {

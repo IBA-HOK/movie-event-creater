@@ -76,8 +76,9 @@ const text = `
     }`
 try {
     fs.writeFileSync('./output/output.txt', text)
+    
     //file written successfully
 } catch (err) {
     console.error(err)
 }
-
+fs.rmSync("images", { recursive: true })
