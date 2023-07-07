@@ -3,3 +3,8 @@ images/
 import.gif
 node/
 output/
+.idea/misc.xml
+.idea/modules.xml
+.idea/movie-event-creater.iml
+.idea/vcs.xml
+.idea/workspace.xml
