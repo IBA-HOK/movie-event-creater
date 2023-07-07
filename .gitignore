@@ -8,3 +8,5 @@ output/
 .idea/movie-event-creater.iml
 .idea/vcs.xml
 .idea/workspace.xml
+*.ps1
+import.mp4をこのフォルダに配置して押せ.ps1

@@ -1,4 +1,3 @@
-
 const sharp = require("sharp");
 let fs = require('fs')
 let gifURL = './import.gif'
@@ -6,7 +5,10 @@ let outputPath = './images'
 const glob = require('glob');
 var urls = []
 
-try{fs.mkdirSync('output')}catch(e){}
+try {
+    fs.mkdirSync('output')
+} catch (e) {
+}
 const url = fs.readdirSync("./images");
 for (let i = 0; i < url.length; i++) {
     urls.push("./images/" + url[i]);
@@ -17,17 +19,15 @@ for (let i = 0; i < url.length; i++) {
     const imageAttrs = [];
     console.log(imagePaths)
     const promises = [];
-    const imagePromise = path =>
-        new Promise(async resolve => {
-            const image = await sharp(path);
-            let width = 0,
-                height = 0;
-            await image
-                .metadata()
-                .then(meta => ([width, height] = [meta.width, meta.height]));
-            const buf = await image.toBuffer();
-            resolve({ width, height, buf });
-        });
+    const imagePromise = path => new Promise(async resolve => {
+        const image = await sharp(path);
+        let width = 0, height = 0;
+        await image
+            .metadata()
+            .then(meta => ([width, height] = [meta.width, meta.height]));
+        const buf = await image.toBuffer();
+        resolve({width, height, buf});
+    });
     imagePaths.forEach(path => promises.push(imagePromise(path)));
     await Promise.all(promises).then(values => {
         values.forEach(value => imageAttrs.push(value));
@@ -40,19 +40,13 @@ for (let i = 0; i < url.length; i++) {
         const left = totalLeft;
         totalLeft += image.width;
         return {
-            input: image.buf,
-            gravity: "northwest",
-            left: left,
-            top: 0
+            input: image.buf, gravity: "northwest", left: left, top: 0
         };
     });
 
-    sharp({
+    await sharp({
         create: {
-            width: outputImgWidth,
-            height: outputImgHeight,
-            channels: 4,
-            background: { r: 255, g: 255, b: 255, alpha: 0 }
+            width: outputImgWidth, height: outputImgHeight, channels: 4, background: {r: 255, g: 255, b: 255, alpha: 0}
         }
     })
         .composite(compositeParams)
@@ -76,7 +70,7 @@ const text = `
     }`
 try {
     fs.writeFileSync('./output/output.txt', text)
-    
+
     //file written successfully
 } catch (err) {
     console.error(err)
